@@ -1,0 +1,23 @@
+* {box-sizing: border-box;}
+.container { display:flex; flex-direction: row;}
+.item1 {
+    background-color: greenyellow;
+    border: 2px solid black;
+    flex-grow: 3;
+}
+.item2 {
+    background-color: goldenrod;
+    border: 2px solid black;
+    flex-grow: 1;
+}
+.item3 {
+    background-color: gray;
+    border: 2px solid black;
+    flex-grow: 5;
+}
+.container > div {padding: 15px;}
+@media (max-width:400px) {
+    .container {
+        flex-direction: column;
+    }
+}

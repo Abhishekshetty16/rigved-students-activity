@@ -1,0 +1,15 @@
+.heading {
+    color : blue;
+}
+.sub-heading {
+    color: orangered;
+}
+
+@media (max-width:904px) and (min-width:468px) {
+    .heading {
+        background-color: rebeccapurple;
+    }
+    .sub-heading {
+        background-color: aqua;
+    }
+}
