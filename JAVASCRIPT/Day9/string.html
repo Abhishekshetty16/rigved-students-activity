@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>String types</h2>
+    <script type = "text/javascript">
+        var str = "Abhishek";
+        var str2 = str.concat('Shetty');
+        document.write('<p>str: '+str+',</br> str2: '+str2+'</p>');
+        var str3 = str2.toUpperCase();
+        document.write('<p><i>uppercase: '+str2+'</br> lower case: '+str3+'</i></p>');
+        var str4 = str3.split('S');
+        document.write('str4: '+str4);
+        for(var i = 0; i < str4.length; i++) {
+            document.write('<h3>split: '+str4[i]+'</h3>');
+        }
+        document.write('<h2>Character at 4th index: '+str.charAt(5)+'</h2>');
+    </script>
+</body>
+</html>

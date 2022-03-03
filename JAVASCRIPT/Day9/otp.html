@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var  r= prompt("enter no");
+        var r1=Math.random();
+        if(r==4){   
+        var r2=r1*10000;
+        document.write('<p>OTP: '+Math.round(r2)+'</p>');  
+        }
+        else if (r==6){
+            var r2=r1*1000000;
+            document.write('<p>OTP: '+Math.round(r2)+'</p>');
+        }
+        else if(r!=4 && r!=6){
+            alert("invalid number input 4/6");
+        }  
+    </script>
+</body>
+</html> 

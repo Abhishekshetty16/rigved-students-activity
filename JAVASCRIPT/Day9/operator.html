@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ <h3>Operator</h3>
+ <script type="text/javascript">
+    function add(){
+    var a,b,c;
+    a=Number(document.getElementById("first").value);
+    b=Number(document.getElementById("second").value);
+    c= a + b;
+    document.getElementById("answer").value= c;
+    }
+    function sub(){
+    var a,b,c;
+    a=Number(document.getElementById("first").value);
+    b=Number(document.getElementById("second").value);
+    c= a - b;
+    document.getElementById("answer").value= c;
+    }
+    function multi(){
+    var a,b,c;
+    a=Number(document.getElementById("first").value);
+    b=Number(document.getElementById("second").value);
+    c= a * b;
+    document.getElementById("answer").value= c;
+    }
+    function div(){
+    var a,b,c;
+    a=Number(document.getElementById("first").value);
+    b=Number(document.getElementById("second").value);
+    c= a / b;
+    document.getElementById("answer").value= c;
+    }
+    </script>
+    </head>
+    <body>
+    First number : <input id="first" type="number"><br>
+    Second number: <input id="second" type="number"><br>
+    Result: <input id="answer"><br>
+    <button onclick="add()">+</button>
+    <button onclick="sub()">-</button>
+    <button onclick="multi()">*</button>
+    <button onclick="div()">/</button>
+    
+</body>
+</html>

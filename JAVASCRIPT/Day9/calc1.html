@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>OPERATOR</h1>
+        <form action="#" name="calc">
+            <label>
+                Input1:<input type="number" name="fn">
+           </label><br>
+           <label>
+               Input2: <input type="number" name="sn">
+            </label><br>
+            <label>
+                Result:<input type="number" name="re">
+            </label><br>
+            <label>
+                    <button type="button" onclick = "addNum()">+</button>
+                    <button type="button" onclick = "subNum()">-</button>
+                    <button type="button" onclick = "mulNum()">*</button>
+                    <button type="button" onclick= "divNum()">/</button>
+                </label>
+    <script type="text/javascript">
+        function addNum() {
+            var f = parseFloat(document.calc.fn.value);
+            var s = parseFloat(document.calc.sn.value);
+            var r;
+            r = f + s;
+            document.calc.re.value = r;
+        }
+        function subNum() {
+            var f = parseFloat(document.calc.fn.value);
+            var s = parseFloat(document.calc.sn.value);
+            var r;
+            r = f - s;
+            document.calc.re.value = r;
+        }
+        function mulNum() {
+            var f = parseFloat(document.calc.fn.value);
+            var s = parseFloat(document.calc.sn.value);
+            var r;
+            r = f * s;
+            document.calc.re.value = r;
+        }
+        function divNum() {
+            var f = parseFloat(document.calc.fn.value);
+            var s = parseFloat(document.calc.sn.value);
+            var r;
+            r = f / s;
+            document.calc.re.value = r;
+        }
+    </script>
+</body>
+</html>
