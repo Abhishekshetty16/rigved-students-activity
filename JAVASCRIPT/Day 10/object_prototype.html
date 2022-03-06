@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Object</h1>
+    <script type = "text/javascript">
+        function User(name, age, phone) {
+            this.name = name;
+            this.age = age;
+            this.phone = phone;
+        }
+        User.prototype.getName = function() {
+            return this.name;
+        }
+        User.prototype.setName = function(name) {
+            this.name = name;
+        }
+        User.prototype.getAge = function() {
+            return this.age;
+        }
+        var user1 = new User("abhi", 25, 9558700113);
+        document.write('<b>Name: '+user1.getName()+', Age: '+user1.getAge()+'</b>');
+        user1.setName('arun');
+        document.write('<p><i>Name: '+user1.getName()+', Age: '+user1.getAge()+'<i></p>');
+    </script>
+</body>
+</html>
