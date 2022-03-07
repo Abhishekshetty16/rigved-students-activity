@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>rainbow</h1>
+    <div>
+        <canvas id = "c1" width = "400" height="200" style = "border: solid 2px black"></canvas>
+    </div>
+    <script type = 'text/javascript'>
+        var ele = document.getElementById('c1');
+        var context = ele.getContext('2d');
+        context.fillStyle = 'red';
+        context.beginPath();
+        context.arc(200,250, 200, 0,Math.PI, true);
+        context.fill();
+        context.fillStyle = 'orange';
+        context.beginPath();
+        context.arc(200,250,180, 0,Math.PI, true);
+        context.fill();
+        context.fillStyle = 'yellow';
+        context.beginPath();
+        context.arc(200,250,160, 0,Math.PI, true);
+        context.fill();
+        context.fillStyle = 'green';
+        context.beginPath();
+        context.arc(200,250,140, 0,Math.PI, true);
+        context.fill();
+        context.fillStyle = 'blue';
+        context.beginPath();
+        context.arc(200,250,120, 0,Math.PI, true);
+        context.fill();
+        context.fillStyle = 'indigo';
+        context.beginPath();
+        context.arc(200,250,100, 0,Math.PI, true);
+        context.fill();
+        context.fillStyle = 'violet';
+        context.beginPath();
+        context.arc(200,250,80, 0,Math.PI, true);
+        context.fill();
+        context.fillStyle = 'white';
+        context.beginPath();
+        context.arc(200,250,80, 0,Math.PI, true);
+        context.fill();
+     
+  </script>
+</body>
+</html>
