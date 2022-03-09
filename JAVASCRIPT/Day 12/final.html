@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Data</h2>
+    <div id = 'i1'></div>
+    <div id = 'i2'></div>
+    <a href = "update.html">Next</a>
+    <script type = "text/javascript">
+        var data = localStorage.getItem('user');
+        var data2 = localStorage.getItem('user2');
+        document.getElementById('i1').innerHTML = "Hello  "+data
+        document.getElementById('i2').innerHTML = "Age: "+data2
+        function removeUser() {
+            localStorage.removeItem('user');
+            localStorage.removeItem('user2');
+        }
+    </script>
+</body>
+</html>

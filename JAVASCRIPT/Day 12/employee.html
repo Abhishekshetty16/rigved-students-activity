@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <h3>Employee deatails:</h3>
+        <label> Name:</label>
+        <input type="text" id="n1"><br>
+        <label>Age:</lable>
+            <input type="number" id="a1">&nbsp;<p id="err"></p>
+            <input type="submit" onclick="check1();">
+    <script type="text/javascript">
+        function check1() {
+            var name = document.getElementById('n1').value;
+            var y = document.getElementById('a1').value;
+            try {
+                if (parseInt(y) > 18 && parseInt(y) < 60) {
+                    document.getElementById('err').innerHTML = '';
+                    alert('Registered');
+                } else {
+                    throw "Invalid Age";
+                }
+            } catch (error) {
+                document.getElementById('err').innerHTML = error;
+            }
+        }
+    </script>
+</body>
+
+</html>
