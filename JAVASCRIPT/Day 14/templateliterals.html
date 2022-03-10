@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Template String</h2>
+    <script type = 'text/javascript'>
+        let name = 'Abhishek';
+        let age = 25;
+        let ab='*';
+        document.write(`<p>Hello ${name}  your age is ${age}</p>`);
+        document.write(`<h1>Fruits${ab}</h1>`)
+        let items = ["apple", "orange", "grapes", "mango","papaya"];
+        document.write(`<ul>`);
+        items.forEach(function(item, i) {
+            document.write(`<li>${item}</li><br>`);
+            document.write(`<ul>${item}</ul>`);
+        });
+        document.write(`</ul>`);
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Table</h1>
+    <table border = 4px; cellspacing = 3px; cellpadding = 10px;>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>State</th>
+                <th>City</th>
+            </tr>
+        </thead>
+
+        <tbody id="tb"></tbody>
+    </table>
+
+    <script type="text/javascript">
+        var user = [
+            { name: 'Alex', age: 35, address: { state: 'KA',  city:' BLR' } },
+            { name: 'Bruce', age: 45 },
+            { name: 'David', age: 55, address: { state: 'MH', city:'MU' } },
+            { name: 'Charles', age: 25 },
+            { name: 'Edward', age: 49, address: { state: 'TN',  city:'CH' } }
+        ]
+        var tb = document.getElementById('tb');
+        for(let i = 0; i < user.length; i++){
+            let tr = document.createElement('tr');
+            tb.appendChild(tr);
+            d1 = document.createTextNode(user[i]?.name);
+            d2 = document.createTextNode(user[i]?.age);
+            d3 = document.createTextNode(user[i]?.address?.state);
+            d4 = document.createTextNode(user[i]?.address?.city);
+        
+            let td1 = document.createElement('td');
+            tr.appendChild(td1);
+            td1.appendChild(d1);
+            let td2 = document.createElement('td');
+            tr.appendChild(td2);
+            td2.appendChild(d2);
+            let td3 = document.createElement('td');
+            tr.appendChild(td3);
+            td3.appendChild(d3);
+            let td4 = document.createElement('td');
+            tr.appendChild(td4);
+            td4.appendChild(d4); 
+        }
+    </script>
+</body>
+
+</html>

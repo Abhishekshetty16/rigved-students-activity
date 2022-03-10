@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Optional Chain</h2>
+    <script type = "text/javascript">
+        let users = [
+        {name : "Abhi", age : 45, address: {state: "Karnataka", city : "BLR"}},
+        {name : "Arun", age : 15,},
+        {name : "Adam", age : 25, address: {state: "Maharashtra", city : "Mu"}}
+        ];
+        for(let i = 0; i < users.length; i++) {
+            document.write(`<p>Name:${users[i]?.name}, Age: ${users[i]?.age}, 
+            State: ${users[i]?.address?.state}, City: ${users[i]?.address?.city}</p>`);   // optional chain ?. 
+        }
+    </script>
+</body>
+</html>
