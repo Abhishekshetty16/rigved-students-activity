@@ -1,0 +1,798 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 14
+Server version: 8.0.28 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show tables;
+ERROR 1046 (3D000): No database selected
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| employe_table      |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql> select employee_tabel;
+ERROR 1054 (42S22): Unknown column 'employee_tabel' in 'field list'
+mysql> select employe_table;
+ERROR 1054 (42S22): Unknown column 'employe_table' in 'field list'
+mysql> use employe_table;
+Database changed
+mysql> show tables;
++-------------------------+
+| Tables_in_employe_table |
++-------------------------+
+| t2                      |
+| t3                      |
++-------------------------+
+2 rows in set (0.01 sec)
+
+mysql> select*from t2;
++-----+--------+
+| tno | tname  |
++-----+--------+
+|  11 | 68     |
+| 100 | Abhi   |
+| 200 | Arun   |
+| 300 | Shaqib |
++-----+--------+
+4 rows in set (0.00 sec)
+
+mysql> select*from t1;
+ERROR 1146 (42S02): Table 'employe_table.t1' doesn't exist
+mysql> select*from t3;
+Empty set (0.01 sec)
+
+mysql> insert table t3(tno int primary,tname varchar(50)not null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table t3(tno int primary,tname varchar(50)not null)' at line 1
+mysql> create table t3(tno int primary,tname varchar(50)not null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',tname varchar(50)not null)' at line 1
+mysql> create table t3(tno int primary key,tname varchar(50)not null);
+ERROR 1050 (42S01): Table 't3' already exists
+mysql> insert into t3(11,'abhi');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '11,'abhi')' at line 1
+mysql> create table t4(tno int primary,tname varchar(50)not null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',tname varchar(50)not null)' at line 1
+mysql> create table t4(tno int primary key,tname varchar(50)not null);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into t4(11,'abhi');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '11,'abhi')' at line 1
+mysql> insert into t4 values(11,'abhi');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from t4;
++-----+-------+
+| tno | tname |
++-----+-------+
+|  11 | abhi  |
++-----+-------+
+1 row in set (0.00 sec)
+
+mysql> truncate table t4;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select*from t4;
+Empty set (0.02 sec)
+
+mysql> select*from t2;
++-----+--------+
+| tno | tname  |
++-----+--------+
+|  11 | 68     |
+| 100 | Abhi   |
+| 200 | Arun   |
+| 300 | Shaqib |
++-----+--------+
+4 rows in set (0.01 sec)
+
+mysql> delete from t2 tname;
+Query OK, 4 rows affected (0.01 sec)
+
+mysql> select*from t2;
+Empty set (0.00 sec)
+
+mysql> rollback t2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 't2' at line 1
+mysql> create table t1(tno int primary key auto_increment,tname varchar(14));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> insert into t1(tname)values('Abhi');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into t1(tname)values('Ajit');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from t1;
++-----+-------+
+| tno | tname |
++-----+-------+
+|   1 | Abhi  |
+|   2 | Ajit  |
++-----+-------+
+2 rows in set (0.00 sec)
+
+mysql> create table t4(tno int primary key auto_increment=400,tname varchar(14));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=400,tname varchar(14))' at line 1
+mysql> create table t5(tno int primary key auto_increment=400,tname varchar(14));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=400,tname varchar(14))' at line 1
+mysql> create table t5(tno int primary key auto_increment,tname varchar(14)auto_increment=400);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=400)' at line 1
+mysql> create table t5(tno int primary key auto_increment,tname varchar(14))auto_increment=400;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into t4(tname)values('Ajit');
+ERROR 1364 (HY000): Field 'tno' doesn't have a default value
+mysql> select*from t4;
+Empty set (0.01 sec)
+
+mysql> insert into t4(tname)values('A');
+ERROR 1364 (HY000): Field 'tno' doesn't have a default value
+mysql> insert into t5(tname)values('A');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into t5(tname)values('Ads');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from t5;
++-----+-------+
+| tno | tname |
++-----+-------+
+| 400 | A     |
+| 401 | Ads   |
++-----+-------+
+2 rows in set (0.01 sec)
+
+mysql> show tables;
++-------------------------+
+| Tables_in_employe_table |
++-------------------------+
+| t1                      |
+| t2                      |
+| t3                      |
+| t4                      |
+| t5                      |
++-------------------------+
+5 rows in set (0.01 sec)
+
+mysql> drop t4;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 't4' at line 1
+mysql> drop  table t4;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> drop table t1;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
++-------------------------+
+| Tables_in_employe_table |
++-------------------------+
+| t2                      |
+| t3                      |
+| t5                      |
++-------------------------+
+3 rows in set (0.00 sec)
+
+mysql> create table emp(id int primary key auto_increment, name varchar(40),dob date, salary double);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into emp(name,dob,salary)values('Abhi','1998-05-16',320000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp(name,dob,salary)values('Ajit','1996-08-09',45000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp(name,dob,salary)values('Ajit','1998-01-08',850000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp(name,dob,salary)values('it','1298-02-05',20000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from emp;
++----+------+------------+--------+
+| id | name | dob        | salary |
++----+------+------------+--------+
+|  1 | Abhi | 1998-05-16 | 320000 |
+|  2 | Ajit | 1996-08-09 |  45000 |
+|  3 | Ajit | 1998-01-08 | 850000 |
+|  4 | it   | 1298-02-05 |  20000 |
++----+------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select *from emp where salary between 10000 and 50000;
++----+------+------------+--------+
+| id | name | dob        | salary |
++----+------+------------+--------+
+|  2 | Ajit | 1996-08-09 |  45000 |
+|  4 | it   | 1298-02-05 |  20000 |
++----+------+------------+--------+
+2 rows in set (0.01 sec)
+
+mysql> select *from emp where salary >30000;
++----+------+------------+--------+
+| id | name | dob        | salary |
++----+------+------------+--------+
+|  1 | Abhi | 1998-05-16 | 320000 |
+|  2 | Ajit | 1996-08-09 |  45000 |
+|  3 | Ajit | 1998-01-08 | 850000 |
++----+------+------------+--------+
+3 rows in set (0.01 sec)
+
+mysql> select *from emp where salary <30000;
++----+------+------------+--------+
+| id | name | dob        | salary |
++----+------+------------+--------+
+|  4 | it   | 1298-02-05 |  20000 |
++----+------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select*from emp where name='Arun' and salary >550000;
+Empty set (0.00 sec)
+
+mysql> select*from emp where name='Ajit' and salary >550000;
++----+------+------------+--------+
+| id | name | dob        | salary |
++----+------+------------+--------+
+|  3 | Ajit | 1998-01-08 | 850000 |
++----+------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select*from emp where name='Ajit' and salary >4000;
++----+------+------------+--------+
+| id | name | dob        | salary |
++----+------+------------+--------+
+|  2 | Ajit | 1996-08-09 |  45000 |
+|  3 | Ajit | 1998-01-08 | 850000 |
++----+------+------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select*from emp where year(dob) > 1998;
+Empty set (0.01 sec)
+
+mysql> select*from emp where year(dob) > 1996;
++----+------+------------+--------+
+| id | name | dob        | salary |
++----+------+------------+--------+
+|  1 | Abhi | 1998-05-16 | 320000 |
+|  3 | Ajit | 1998-01-08 | 850000 |
++----+------+------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> update emp(name)value('Arun') where id=3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(name)value('Arun') where id=3' at line 1
+mysql> update emp set name='Arun' where id=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from emp;
++----+------+------------+--------+
+| id | name | dob        | salary |
++----+------+------------+--------+
+|  1 | Abhi | 1998-05-16 | 320000 |
+|  2 | Ajit | 1996-08-09 |  45000 |
+|  3 | Arun | 1998-01-08 | 850000 |
+|  4 | it   | 1298-02-05 |  20000 |
++----+------+------------+--------+
+4 rows in set (0.01 sec)
+
+mysql> select*from emp where year(dob) >1994 nad year(dob) < 2000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'nad year(dob) < 2000' at line 1
+mysql> select*from emp where year(dob) >1994 and year(dob) < 2000;
++----+------+------------+--------+
+| id | name | dob        | salary |
++----+------+------------+--------+
+|  1 | Abhi | 1998-05-16 | 320000 |
+|  2 | Ajit | 1996-08-09 |  45000 |
+|  3 | Arun | 1998-01-08 | 850000 |
++----+------+------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select date_format(dob, '%d-%m-%Y') from emp;
++------------------------------+
+| date_format(dob, '%d-%m-%Y') |
++------------------------------+
+| 16-05-1998                   |
+| 09-08-1996                   |
+| 08-01-1998                   |
+| 05-02-1298                   |
++------------------------------+
+4 rows in set (0.01 sec)
+
+mysql> select lower('hello');
++----------------+
+| lower('hello') |
++----------------+
+| hello          |
++----------------+
+1 row in set (0.01 sec)
+
+mysql> replace ('abhi and ajit','i','k');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '('abhi and ajit','i','k')' at line 1
+mysql> select replace ('abhi and ajit','i','k');
++-----------------------------------+
+| replace ('abhi and ajit','i','k') |
++-----------------------------------+
+| abhk and ajkt                     |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select reverse('abhi');
++-----------------+
+| reverse('abhi') |
++-----------------+
+| ihba            |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select name;
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> select name ,reverse(name) from emp;
++------+---------------+
+| name | reverse(name) |
++------+---------------+
+| Abhi | ihbA          |
+| Ajit | tijA          |
+| Arun | nurA          |
+| it   | ti            |
++------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> select*from emp;
++----+------+------------+--------+
+| id | name | dob        | salary |
++----+------+------------+--------+
+|  1 | Abhi | 1998-05-16 | 320000 |
+|  2 | Ajit | 1996-08-09 |  45000 |
+|  3 | Arun | 1998-01-08 | 850000 |
+|  4 | it   | 1298-02-05 |  20000 |
++----+------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select name,replace(name,'a','k');
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> select name,replace(name,'a','k')from emp;
++------+-----------------------+
+| name | replace(name,'a','k') |
++------+-----------------------+
+| Abhi | Abhi                  |
+| Ajit | Ajit                  |
+| Arun | Arun                  |
+| it   | it                    |
++------+-----------------------+
+4 rows in set (0.00 sec)
+
+mysql> select name,replace(name,'A','k')from emp;
++------+-----------------------+
+| name | replace(name,'A','k') |
++------+-----------------------+
+| Abhi | kbhi                  |
+| Ajit | kjit                  |
+| Arun | krun                  |
+| it   | it                    |
++------+-----------------------+
+4 rows in set (0.00 sec)
+
+mysql> select*from emp;
++----+------+------------+--------+
+| id | name | dob        | salary |
++----+------+------------+--------+
+|  1 | Abhi | 1998-05-16 | 320000 |
+|  2 | Ajit | 1996-08-09 |  45000 |
+|  3 | Arun | 1998-01-08 | 850000 |
+|  4 | it   | 1298-02-05 |  20000 |
++----+------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select min (salary) from emp;
+ERROR 1630 (42000): FUNCTION employe_table.min does not exist. Check the 'Function Name Parsing and Resolution' section in the Reference Manual
+mysql> select min(salary) from emp;
++-------------+
+| min(salary) |
++-------------+
+|       20000 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select max(salary) from emp;
++-------------+
+| max(salary) |
++-------------+
+|      850000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> insert into emp(name,dob,salary) valuse('Sach',current_date,50235);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'valuse('Sach',current_date,50235)' at line 1
+mysql> insert into emp(name,dob,salary) values('Sach',current_date,50235);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from emp;
++----+------+------------+--------+
+| id | name | dob        | salary |
++----+------+------------+--------+
+|  1 | Abhi | 1998-05-16 | 320000 |
+|  2 | Ajit | 1996-08-09 |  45000 |
+|  3 | Arun | 1998-01-08 | 850000 |
+|  4 | it   | 1298-02-05 |  20000 |
+|  5 | Sach | 2022-03-16 |  50235 |
++----+------+------------+--------+
+5 rows in set (0.04 sec)
+
+mysql> select current_time;
++--------------+
+| current_time |
++--------------+
+| 12:45:26     |
++--------------+
+1 row in set (0.00 sec)
+
+mysql>
+
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 8.0.28 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| employe_table      |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.02 sec)
+
+mysql> view employe_table;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'view employe_table' at line 1
+mysql> select employe table;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table' at line 1
+mysql> use employe_table;
+Database changed
+mysql> show tablles;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tablles' at line 1
+mysql> show tables;
++-------------------------+
+| Tables_in_employe_table |
++-------------------------+
+| emp                     |
+| t2                      |
+| t3                      |
+| t5                      |
++-------------------------+
+4 rows in set (0.02 sec)
+
+mysql> select*from t5;
++-----+-------+
+| tno | tname |
++-----+-------+
+| 400 | A     |
+| 401 | Ads   |
++-----+-------+
+2 rows in set (0.01 sec)
+
+mysql> select*from t1;
+ERROR 1146 (42S02): Table 'employe_table.t1' doesn't exist
+mysql> select*from t2;
+Empty set (0.01 sec)
+
+mysql> select*from t3;
+Empty set (0.01 sec)
+
+mysql> select*from emp;
++----+------+------------+--------+
+| id | name | dob        | salary |
++----+------+------------+--------+
+|  1 | Abhi | 1998-05-16 | 320000 |
+|  2 | Ajit | 1996-08-09 |  45000 |
+|  3 | Arun | 1998-01-08 | 850000 |
+|  4 | it   | 1298-02-05 |  20000 |
+|  5 | Sach | 2022-03-16 |  50235 |
++----+------+------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select*from emp where id in (1,3);
++----+------+------------+--------+
+| id | name | dob        | salary |
++----+------+------------+--------+
+|  1 | Abhi | 1998-05-16 | 320000 |
+|  3 | Arun | 1998-01-08 | 850000 |
++----+------+------------+--------+
+2 rows in set (0.01 sec)
+
+mysql> select*from emp where not id in (1,3);
++----+------+------------+--------+
+| id | name | dob        | salary |
++----+------+------------+--------+
+|  2 | Ajit | 1996-08-09 |  45000 |
+|  4 | it   | 1298-02-05 |  20000 |
+|  5 | Sach | 2022-03-16 |  50235 |
++----+------+------------+--------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql> create table dept(id primary key ,name varchar(43));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'primary key ,name varchar(43))' at line 1
+mysql> create table dept(id int  primary key ,name varchar(43));
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> insert into dep valuse(10,'Account');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'valuse(10,'Account')' at line 1
+mysql> insert into dept values(10,'Account');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into dept values(20,'sales');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dept values(30,'finance');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dept values(40,'market');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from dept
+    -> ;
++----+---------+
+| id | name    |
++----+---------+
+| 10 | Account |
+| 20 | sales   |
+| 30 | finance |
+| 40 | market  |
++----+---------+
+4 rows in set (0.00 sec)
+
+mysql> create table employee(id int primary key,ename varchar(50),dept_no int,salary double,foreign key(dept_no),reference dept(id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',reference dept(id)' at line 1
+mysql> create table employee(id int primary key,ename varchar(50),dept_no int,salary double,foreign key(dept_no),references dept(id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',references dept(id)' at line 1
+mysql> create table employee(id int primary key,ename varchar(50),dept_no int,salary double,foreign key(dept_no),references dept(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',references dept(id))' at line 1
+mysql> create table employee(id int primary key,ename varchar(50),dept_no int,salary double,foreign key(dept_no) references dept(id));
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> desc dept
+    -> ;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(43) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.02 sec)
+
+mysql> desc employee
+    -> ;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int         | NO   | PRI | NULL    |       |
+| ename   | varchar(50) | YES  |     | NULL    |       |
+| dept_no | int         | YES  | MUL | NULL    |       |
+| salary  | double      | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into employee values(1,'Abhi',15,35244);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`employe_table`.`employee`, CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`dept_no`) REFERENCES `dept` (`id`))
+mysql> insert into employee values(1,'Abhi',20,35244);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from employee;
++----+-------+---------+--------+
+| id | ename | dept_no | salary |
++----+-------+---------+--------+
+|  1 | Abhi  |      20 |  35244 |
++----+-------+---------+--------+
+1 row in set (0.01 sec)
+
+mysql> insert into employee values(1,'ajihi',20,3244);
+ERROR 1062 (23000): Duplicate entry '1' for key 'employee.PRIMARY'
+mysql> insert into employee values(2,'ajihi',20,3244);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(3,'iadi',10,324220);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(4,'aaadi',40,3420);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(5,'adaff',40,355420);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(6,'arun',40,35420);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(7,'aku',20,35555420);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from employee;
++----+-------+---------+----------+
+| id | ename | dept_no | salary   |
++----+-------+---------+----------+
+|  1 | Abhi  |      20 |    35244 |
+|  2 | ajihi |      20 |     3244 |
+|  3 | iadi  |      10 |   324220 |
+|  4 | aaadi |      40 |     3420 |
+|  5 | adaff |      40 |   355420 |
+|  6 | arun  |      40 |    35420 |
+|  7 | aku   |      20 | 35555420 |
++----+-------+---------+----------+
+7 rows in set (0.00 sec)
+
+mysql> inser into employee values(8,'karth',null,85000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'inser into employee values(8,'karth',null,85000)' at line 1
+mysql> insert into employee values(8,'karth',null,85000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from employee;
++----+-------+---------+----------+
+| id | ename | dept_no | salary   |
++----+-------+---------+----------+
+|  1 | Abhi  |      20 |    35244 |
+|  2 | ajihi |      20 |     3244 |
+|  3 | iadi  |      10 |   324220 |
+|  4 | aaadi |      40 |     3420 |
+|  5 | adaff |      40 |   355420 |
+|  6 | arun  |      40 |    35420 |
+|  7 | aku   |      20 | 35555420 |
+|  8 | karth |    NULL |    85000 |
++----+-------+---------+----------+
+8 rows in set (0.01 sec)
+
+mysql> update employee set dept_no=20 where id =8;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from employee;
++----+-------+---------+----------+
+| id | ename | dept_no | salary   |
++----+-------+---------+----------+
+|  1 | Abhi  |      20 |    35244 |
+|  2 | ajihi |      20 |     3244 |
+|  3 | iadi  |      10 |   324220 |
+|  4 | aaadi |      40 |     3420 |
+|  5 | adaff |      40 |   355420 |
+|  6 | arun  |      40 |    35420 |
+|  7 | aku   |      20 | 35555420 |
+|  8 | karth |      20 |    85000 |
++----+-------+---------+----------+
+8 rows in set (0.00 sec)
+
+mysql> select *from employee where  dept_no=(select id from dept where name='sales');
++----+-------+---------+----------+
+| id | ename | dept_no | salary   |
++----+-------+---------+----------+
+|  1 | Abhi  |      20 |    35244 |
+|  2 | ajihi |      20 |     3244 |
+|  7 | aku   |      20 | 35555420 |
+|  8 | karth |      20 |    85000 |
++----+-------+---------+----------+
+4 rows in set (0.01 sec)
+
+mysql> select max salary from employee;
+ERROR 1054 (42S22): Unknown column 'max' in 'field list'
+mysql> select max (salary )from employee;
+ERROR 1630 (42000): FUNCTION employe_table.max does not exist. Check the 'Function Name Parsing and Resolution' section in the Reference Manual
+mysql> select max(salary)from employee;
++-------------+
+| max(salary) |
++-------------+
+|    35555420 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select max(salary)from employee where salary <(select max(salary)from employee);
++-------------+
+| max(salary) |
++-------------+
+|      355420 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select dept_no, count(dept_no) from employee group by dept_no;
++---------+----------------+
+| dept_no | count(dept_no) |
++---------+----------------+
+|      10 |              1 |
+|      20 |              4 |
+|      40 |              3 |
++---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> select *from employee;
++----+-------+---------+----------+
+| id | ename | dept_no | salary   |
++----+-------+---------+----------+
+|  1 | Abhi  |      20 |    35244 |
+|  2 | ajihi |      20 |     3244 |
+|  3 | iadi  |      10 |   324220 |
+|  4 | aaadi |      40 |     3420 |
+|  5 | adaff |      40 |   355420 |
+|  6 | arun  |      40 |    35420 |
+|  7 | aku   |      20 | 35555420 |
+|  8 | karth |      20 |    85000 |
++----+-------+---------+----------+
+8 rows in set (0.00 sec)
+
+mysql> select *from dept;
++----+---------+
+| id | name    |
++----+---------+
+| 10 | Account |
+| 20 | sales   |
+| 30 | finance |
+| 40 | market  |
++----+---------+
+4 rows in set (0.00 sec)
+
+mysql> select e.id,e.ename,e.dept_no,e.salary,d.id,d.name from employee e inner join dept d on e.dept_no=d.id;
++----+-------+---------+----------+----+---------+
+| id | ename | dept_no | salary   | id | name    |
++----+-------+---------+----------+----+---------+
+|  3 | iadi  |      10 |   324220 | 10 | Account |
+|  1 | Abhi  |      20 |    35244 | 20 | sales   |
+|  2 | ajihi |      20 |     3244 | 20 | sales   |
+|  7 | aku   |      20 | 35555420 | 20 | sales   |
+|  8 | karth |      20 |    85000 | 20 | sales   |
+|  4 | aaadi |      40 |     3420 | 40 | market  |
+|  5 | adaff |      40 |   355420 | 40 | market  |
+|  6 | arun  |      40 |    35420 | 40 | market  |
++----+-------+---------+----------+----+---------+
+8 rows in set (0.00 sec)
+
+mysql> select e.id,e.ename,e.dept_no,e.salary,d.id,d.name from employee e left join dept d on e.dept_no=d.id;
++----+-------+---------+----------+------+---------+
+| id | ename | dept_no | salary   | id   | name    |
++----+-------+---------+----------+------+---------+
+|  1 | Abhi  |      20 |    35244 |   20 | sales   |
+|  2 | ajihi |      20 |     3244 |   20 | sales   |
+|  3 | iadi  |      10 |   324220 |   10 | Account |
+|  4 | aaadi |      40 |     3420 |   40 | market  |
+|  5 | adaff |      40 |   355420 |   40 | market  |
+|  6 | arun  |      40 |    35420 |   40 | market  |
+|  7 | aku   |      20 | 35555420 |   20 | sales   |
+|  8 | karth |      20 |    85000 |   20 | sales   |
++----+-------+---------+----------+------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select e.id,e.ename,e.dept_no,e.salary,d.id,d.name from employee e right join dept d on e.dept_no=d.id;
++------+-------+---------+----------+----+---------+
+| id   | ename | dept_no | salary   | id | name    |
++------+-------+---------+----------+----+---------+
+|    3 | iadi  |      10 |   324220 | 10 | Account |
+|    1 | Abhi  |      20 |    35244 | 20 | sales   |
+|    2 | ajihi |      20 |     3244 | 20 | sales   |
+|    7 | aku   |      20 | 35555420 | 20 | sales   |
+|    8 | karth |      20 |    85000 | 20 | sales   |
+| NULL | NULL  |    NULL |     NULL | 30 | finance |
+|    4 | aaadi |      40 |     3420 | 40 | market  |
+|    5 | adaff |      40 |   355420 | 40 | market  |
+|    6 | arun  |      40 |    35420 | 40 | market  |
++------+-------+---------+----------+----+---------+
+9 rows in set (0.00 sec)
+
+mysql>

@@ -1,0 +1,241 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 16
+Server version: 8.0.28 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| employe_table      |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.02 sec)
+
+mysql> view employee_table;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'view employee_table' at line 1
+mysql> use employee_table;
+ERROR 1049 (42000): Unknown database 'employee_table'
+mysql> use employe_table;
+Database changed
+mysql> show tables;
++-------------------------+
+| Tables_in_employe_table |
++-------------------------+
+| dept                    |
+| emp                     |
+| employee                |
+| t2                      |
+| t3                      |
+| t5                      |
++-------------------------+
+6 rows in set (0.04 sec)
+
+mysql> create table student(rollno int primary key,name varchar(40)not null,age int);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert student(name,age)values('raj',20);
+ERROR 1364 (HY000): Field 'rollno' doesn't have a default value
+mysql> drop table student;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table student(rollno int primary key auto_increment,name varchar(40)not null,age int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert student(name,age)values('raj',20);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select*from student;
++--------+------+------+
+| rollno | name | age  |
++--------+------+------+
+|      1 | raj  |   20 |
++--------+------+------+
+1 row in set (0.00 sec)
+
+mysql> insert student(name,age)values('ramesh',20);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert student(name,age)values('ravi',21);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert student(name,age)values('suraj',22);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select*from student;
++--------+--------+------+
+| rollno | name   | age  |
++--------+--------+------+
+|      1 | raj    |   20 |
+|      2 | ramesh |   20 |
+|      3 | ravi   |   21 |
+|      4 | suraj  |   22 |
++--------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> create table marks(mid int,physics int,maths int,chemistry int,student_rollno int,foreign key(student_rollno references student(rollno));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'references student(rollno))' at line 1
+mysql> create table marks(mid int,physics int,maths int,chemistry int,student_rollno int,foreign key(student_rollno) references student(rollno));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select*from student;
++--------+--------+------+
+| rollno | name   | age  |
++--------+--------+------+
+|      1 | raj    |   20 |
+|      2 | ramesh |   20 |
+|      3 | ravi   |   21 |
+|      4 | suraj  |   22 |
++--------+--------+------+
+4 rows in set (0.02 sec)
+
+mysql> select*from marks;
+Empty set (0.00 sec)
+
+mysql> insert marks(mid,physics,maths,chemisty) values(11,70,80,70);
+ERROR 1054 (42S22): Unknown column 'chemisty' in 'field list'
+mysql> insert marks(mid,physics,maths,chemistry) values(11,70,80,70);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert marks(mid,physics,maths,chemistry) values(22,80,80,80);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert marks(mid,physics,maths,chemistry) values(33,90,90,70);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert marks(mid,physics,maths,chemistry) values(44,88,88,77);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from marks;
++------+---------+-------+-----------+----------------+
+| mid  | physics | maths | chemistry | student_rollno |
++------+---------+-------+-----------+----------------+
+|   11 |      70 |    80 |        70 |           NULL |
+|   22 |      80 |    80 |        80 |           NULL |
+|   33 |      90 |    90 |        70 |           NULL |
+|   44 |      88 |    88 |        77 |           NULL |
++------+---------+-------+-----------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select*from student;
++--------+--------+------+
+| rollno | name   | age  |
++--------+--------+------+
+|      1 | raj    |   20 |
+|      2 | ramesh |   20 |
+|      3 | ravi   |   21 |
+|      4 | suraj  |   22 |
++--------+--------+------+
+4 rows in set (0.01 sec)
+
+mysql> select s.rollno,s.name,s.age,m.physics,m.maths,m.chemistry from student s inner join marks m on m.student_rollno=s.rollno;
+Empty set (0.00 sec)
+
+mysql> select s.rollno,s.name,s.age,m.physics,m.maths,m.chemistry from student s left join marks m on m.student_rollno=s.rollno;
++--------+--------+------+---------+-------+-----------+
+| rollno | name   | age  | physics | maths | chemistry |
++--------+--------+------+---------+-------+-----------+
+|      1 | raj    |   20 |    NULL |  NULL |      NULL |
+|      2 | ramesh |   20 |    NULL |  NULL |      NULL |
+|      3 | ravi   |   21 |    NULL |  NULL |      NULL |
+|      4 | suraj  |   22 |    NULL |  NULL |      NULL |
++--------+--------+------+---------+-------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> drop table marks;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create table marks(mid int,physics int,maths int,chemistry int,student_rollno int,foreign key(student_rollno) references student(rollno));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into marks values(11,70,80,70,2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from marks;
++------+---------+-------+-----------+----------------+
+| mid  | physics | maths | chemistry | student_rollno |
++------+---------+-------+-----------+----------------+
+|   11 |      70 |    80 |        70 |              2 |
++------+---------+-------+-----------+----------------+
+1 row in set (0.01 sec)
+
+mysql> insert into marks values(22,80,80,80,1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into marks values(33,90,90,70,3);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into marks values(44,88,88,77,4);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from marks;
++------+---------+-------+-----------+----------------+
+| mid  | physics | maths | chemistry | student_rollno |
++------+---------+-------+-----------+----------------+
+|   11 |      70 |    80 |        70 |              2 |
+|   22 |      80 |    80 |        80 |              1 |
+|   33 |      90 |    90 |        70 |              3 |
+|   44 |      88 |    88 |        77 |              4 |
++------+---------+-------+-----------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select s.rollno,s.name,s.age,m.physics,m.maths,m.chemistry from student s inner join marks m on m.student_rollno=s.rollno;
++--------+--------+------+---------+-------+-----------+
+| rollno | name   | age  | physics | maths | chemistry |
++--------+--------+------+---------+-------+-----------+
+|      1 | raj    |   20 |      80 |    80 |        80 |
+|      2 | ramesh |   20 |      70 |    80 |        70 |
+|      3 | ravi   |   21 |      90 |    90 |        70 |
+|      4 | suraj  |   22 |      88 |    88 |        77 |
++--------+--------+------+---------+-------+-----------+
+4 rows in set (0.02 sec)
+
+mysql> select s.rollno,s.name,m.physics,m.maths,m.chemistry from student s inner join marks m on m.student_rollno=s.rollno;
++--------+--------+---------+-------+-----------+
+| rollno | name   | physics | maths | chemistry |
++--------+--------+---------+-------+-----------+
+|      1 | raj    |      80 |    80 |        80 |
+|      2 | ramesh |      70 |    80 |        70 |
+|      3 | ravi   |      90 |    90 |        70 |
+|      4 | suraj  |      88 |    88 |        77 |
++--------+--------+---------+-------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select s.rollno,s.name,m.physics,m.maths,m.chemistry,(physics+maths+chemistry) total,round(physic+maths+chemistry)/3,2)average from student s inner join marks m on m.student_rollno=s.rollno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')average from student s inner join marks m on m.student_rollno=s.rollno' at line 1
+mysql> select s.rollno,s.name,m.physics,m.maths,m.chemistry,(physics+maths+chemistry) total from student s inner join marks m on m.student_rollno=s.rollno;
++--------+--------+---------+-------+-----------+-------+
+| rollno | name   | physics | maths | chemistry | total |
++--------+--------+---------+-------+-----------+-------+
+|      1 | raj    |      80 |    80 |        80 |   240 |
+|      2 | ramesh |      70 |    80 |        70 |   220 |
+|      3 | ravi   |      90 |    90 |        70 |   250 |
+|      4 | suraj  |      88 |    88 |        77 |   253 |
++--------+--------+---------+-------+-----------+-------+
+4 rows in set (0.01 sec)
+
+mysql> select s.rollno,s.name,m.physics,m.maths,m.chemistry,(physics+maths+chemistry) total,round((physic+maths+chemistry)/3,2)average from student s inner join marks m on m.student_rollno=s.rollno;
+ERROR 1054 (42S22): Unknown column 'physic' in 'field list'
+mysql> select s.rollno,s.name,m.physics,m.maths,m.chemistry,(physics+maths+chemistry) total,round((physics+maths+chemistry)/3,2)average from student s inner join marks m on m.student_rollno=s.rollno;
++--------+--------+---------+-------+-----------+-------+---------+
+| rollno | name   | physics | maths | chemistry | total | average |
++--------+--------+---------+-------+-----------+-------+---------+
+|      1 | raj    |      80 |    80 |        80 |   240 |   80.00 |
+|      2 | ramesh |      70 |    80 |        70 |   220 |   73.33 |
+|      3 | ravi   |      90 |    90 |        70 |   250 |   83.33 |
+|      4 | suraj  |      88 |    88 |        77 |   253 |   84.33 |
++--------+--------+---------+-------+-----------+-------+---------+
+4 rows in set (0.00 sec)
+
+mysql>
