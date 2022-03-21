@@ -1,0 +1,104 @@
+Microsoft Windows [Version 10.0.22000.556]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Abhishek shetty>set path=C:\Users\Abhishek shetty\Downloads\mongodb-windows-x86_64-5.0.6\mongodb-win32-x86_64-windows-5.0.6\bin;%path%
+
+C:\Users\Abhishek shetty>mongo
+MongoDB shell version v5.0.6
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("830d3ff8-b534-47a1-8c53-15cad74c4b23") }
+MongoDB server version: 5.0.6
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+For more comprehensive documentation, see
+        https://docs.mongodb.com/
+Questions? Try the MongoDB Developer Community Forums
+        https://community.mongodb.com
+---
+The server generated these startup warnings when booting:
+        2022-03-21T12:44:07.492+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+        2022-03-21T12:44:07.493+05:30: This server is bound to localhost. Remote systems will be unable to connect to this server. Start the server with --bind_ip <address> to specify which IP addresses it should serve responses from, or with --bind_ip_all to bind to all interfaces. If this behavior is desired, start the server with --bind_ip 127.0.0.1 to disable this warning
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> use mydb;
+switched to db mydb
+> db.createCollection("myCollection');
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:36
+> db.createCollection("myCollection");
+{ "ok" : 1 }
+> show collections;
+myCollection
+> db.myCollection.insert({_id:1,name:'Abhi'});
+WriteResult({ "nInserted" : 1 })
+> db.myCollection.insert({name:'Arun'});
+WriteResult({ "nInserted" : 1 })
+> db.myCollection.insert({firstname:'Ajit',lastname:'Shetty'});
+WriteResult({ "nInserted" : 1 })
+> db.myCollection.find();
+{ "_id" : 1, "name" : "Abhi" }
+{ "_id" : ObjectId("623851a5228f9600b461b12d"), "name" : "Arun" }
+{ "_id" : ObjectId("623851d7228f9600b461b12e"), "firstname" : "Ajit", "lastname" : "Shetty" }
+> db.myCollection.insertOne({_id:2,name:'Akanasha'});
+{ "acknowledged" : true, "insertedId" : 2 }
+> db.myCollection.insertOne({name:'Ampadi'});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("62385240228f9600b461b12f")
+}
+> db.myCollection.find();
+{ "_id" : 1, "name" : "Abhi" }
+{ "_id" : ObjectId("623851a5228f9600b461b12d"), "name" : "Arun" }
+{ "_id" : ObjectId("623851d7228f9600b461b12e"), "firstname" : "Ajit", "lastname" : "Shetty" }
+{ "_id" : 2, "name" : "Akanasha" }
+{ "_id" : ObjectId("62385240228f9600b461b12f"), "name" : "Ampadi" }
+> db.myCollection.find(2);
+uncaught exception: Error: don't know how to massage : number :
+DBCollection.prototype._massageObject@src/mongo/shell/collection.js:215:11
+DBCollection.prototype.find@src/mongo/shell/collection.js:223:30
+@(shell):1:1
+> db.myCollection.insertMany([{_id:11,name:'jithin'},])
+{ "acknowledged" : true, "insertedIds" : [ 11 ] }
+> db.myCollection.insertMany([{_id:12,name:'jatin'}
+... {_id:13,name:'sanket'},
+... {firstname:'hazari',lastname:'sadana'}
+... ]}
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):2:0
+> db.myCollection.insertMany([{_id:12,name:'jatin'} {_id:13,name:'sanket'}, {firstname:'hazari',lastname:'sadana'} ]};
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:50
+> db.myCollection.insertMany([{_id:12,name:'jatin'}, {_id:13,name:'sanket'}, {firstname:'hazari',lastname:'sadana'} ]};
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:115
+> db.myCollection.insertMany([{_id:12,name:'jatin'}, {_id:13,name:'sanket'}, {firstname:'hazari',lastname:'sadana'} ]);
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                12,
+                13,
+                ObjectId("623853a7228f9600b461b130")
+        ]
+}
+>

@@ -1,0 +1,82 @@
+> db.createCollection('employee');
+{ "ok" : 1 }
+> db.createCollection('EMPLOYEE');
+{ "ok" : 1 }
+> show collections;
+EMPLOYEE
+employee
+myCollection
+> db.employee.insert({_id:10,name:'Abhi'});
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({name:'Arun'});
+WriteResult({ "nInserted" : 1 })
+> db.employee.find();
+{ "_id" : 10, "name" : "Abhi" }
+{ "_id" : ObjectId("62385750a4da515262574623"), "name" : "Arun" }
+> db.EMPLOYEE.insert({_id:11,name:'Ajit'});
+WriteResult({ "nInserted" : 1 })
+> db.EMPLOYEE.insert({name:'Asha'});
+WriteResult({ "nInserted" : 1 })
+> db.EMPLOYEE.find();
+{ "_id" : 11, "name" : "Ajit" }
+{ "_id" : ObjectId("623857a1a4da515262574624"), "name" : "Asha" }
+> db.createCollection('user');
+{ "ok" : 1 }
+> db.user.insert({_id:1,name:'Abhi',password:'abhi12'});
+WriteResult({ "nInserted" : 1 })
+> db.user.insert({_id:2,name:'Arun',password:'arun45'});
+WriteResult({ "nInserted" : 1 })
+> db.user.insert({_id:3,name:'Ajit',password:'ajit78'});
+WriteResult({ "nInserted" : 1 })
+> db.user.find();
+{ "_id" : 1, "name" : "Abhi", "password" : "abhi12" }
+{ "_id" : 2, "name" : "Arun", "password" : "arun45" }
+{ "_id" : 3, "name" : "Ajit", "password" : "ajit78" }
+> db.user.findByid(1);
+uncaught exception: TypeError: db.user.findByid is not a function :
+@(shell):1:1
+> db.user.findById(1);
+uncaught exception: TypeError: db.user.findById is not a function :
+@(shell):1:1
+> db.user.find({_id:1});
+{ "_id" : 1, "name" : "Abhi", "password" : "abhi12" }
+> db.user.find({_id:3});
+{ "_id" : 3, "name" : "Ajit", "password" : "ajit78" }
+> db.user.remove({_id:3});
+WriteResult({ "nRemoved" : 1 })
+> db.user.find();
+{ "_id" : 1, "name" : "Abhi", "password" : "abhi12" }
+{ "_id" : 2, "name" : "Arun", "password" : "arun45" }
+> db.user.remove();
+uncaught exception: Error: remove needs a query :
+DBCollection.prototype._parseRemove@src/mongo/shell/collection.js:364:15
+DBCollection.prototype.remove@src/mongo/shell/collection.js:394:18
+@(shell):1:1
+> db.user.deleteMany();
+uncaught exception: Error: find() requires query criteria :
+Bulk/this.find@src/mongo/shell/bulk_api.js:804:23
+DBCollection.prototype.deleteMany@src/mongo/shell/crud_api.js:420:20
+@(shell):1:1
+> db.user.deleteMany({});
+{ "acknowledged" : true, "deletedCount" : 2 }
+> db.user.find();
+> db.user.insertMany([{_id:22,name:'ampadi',password='amp44'},
+... {_id:33,name:'pooja',password='poo443'},
+... {_id:44,name:'hari',password:'harr21'}]);
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:50
+> db.user.insertMany([{_id:22,name:'ampadi',password:'amp44'}, {_id:33,name:'pooja',password:'poo443'}, {_id:44,name:'hari',password:'harr21'}]);
+{ "acknowledged" : true, "insertedIds" : [ 22, 33, 44 ] }
+> db.user.find();
+{ "_id" : 22, "name" : "ampadi", "password" : "amp44" }
+{ "_id" : 33, "name" : "pooja", "password" : "poo443" }
+{ "_id" : 44, "name" : "hari", "password" : "harr21" }
+> db.user.updateone({_id:33},{$set:{password:'pooja342'}});
+uncaught exception: TypeError: db.user.updateone is not a function :
+@(shell):1:1
+> db.user.updateOne({_id:33},{$set:{password:'pooja342'}});
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.user.find();
+{ "_id" : 22, "name" : "ampadi", "password" : "amp44" }
+{ "_id" : 33, "name" : "pooja", "password" : "pooja342" }
+{ "_id" : 44, "name" : "hari", "password" : "harr21" }

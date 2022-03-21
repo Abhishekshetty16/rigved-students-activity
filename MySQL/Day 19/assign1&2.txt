@@ -1,155 +1,3 @@
-Enter password: ****
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 20
-Server version: 8.0.28 MySQL Community Server - GPL
-
-Copyright (c) 2000, 2022, Oracle and/or its affiliates.
-
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
-
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
-mysql> show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| employe_table      |
-| information_schema |
-| mysql              |
-| performance_schema |
-| sys                |
-+--------------------+
-5 rows in set (0.01 sec)
-
-mysql> use employe_table;
-Database changed
-mysql> show tables;
-+-------------------------+
-| Tables_in_employe_table |
-+-------------------------+
-| dept                    |
-| emp                     |
-| employee                |
-| marks                   |
-| product                 |
-| product_history         |
-| student                 |
-+-------------------------+
-7 rows in set (0.01 sec)
-
-mysql> create table person(id int auto_increment,name varchar(50),gender varchar(50));
-ERROR 1075 (42000): Incorrect table definition; there can be only one auto column and it must be defined as a key
-mysql> create table person(id int primary key auto_increment,name varchar(50),gender varchar(50));
-Query OK, 0 rows affected (0.09 sec)
-
-mysql> insert into person(name,gender)values('Abhi','Male');
-Query OK, 1 row affected (0.02 sec)
-
-mysql> insert into person(name,gender)values('Akansha','Female');
-Query OK, 1 row affected (0.04 sec)
-
-mysql> insert into person(name,gender)values('Arun','Male');
-Query OK, 1 row affected (0.01 sec)
-
-mysql> select*from emp;
-+----+--------+------------+--------+
-| id | name   | dob        | salary |
-+----+--------+------------+--------+
-|  1 | Abhi   | 1998-05-16 | 321500 |
-|  2 | Ajit   | 1996-08-09 |  45000 |
-|  3 | Arun   | 1998-01-08 | 850000 |
-|  4 | it     | 1298-02-05 |  20000 |
-|  5 | Sach   | 2022-03-16 |  50235 |
-|  6 | chandu | 1999-06-23 | 520063 |
-+----+--------+------------+--------+
-6 rows in set (0.01 sec)
-
-mysql> select*from person;
-+----+---------+--------+
-| id | name    | gender |
-+----+---------+--------+
-|  1 | Abhi    | Male   |
-|  2 | Akansha | Female |
-|  3 | Arun    | Male   |
-+----+---------+--------+
-3 rows in set (0.00 sec)
-
-mysql> delimiter $$
-mysql> create procedure salutation(id pid int)
-    -> begin
-    -> declare g varchar(50);
-    -> declare n varchar(50);
-    -> select name into n from person where id=pid;
-    -> select gender into g from person where id=pid;
-    -> if lower(g)='male'
-    -> then update person set name=concat('Mr',n)where id=pid;
-    -> then update person set name=concat('Ms',n)where id=pid;
-    -> end if;
-    -> end
-    -> $$
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'pid int)
-begin
-declare g varchar(50);
-declare n varchar(50);
-select name into n ' at line 1
-mysql> create procedure salutation(in pid int)
-    -> begin
-    -> declare g varchar(10);
-    -> declare n varchar(10);
-    -> select name into n from person where id=pid;
-    -> select gender into g from person where id=pid;
-    -> if lower(g) = 'male'
-    -> then update person set name=concat('Mr.',n) where id=pid;
-    -> else update person set name=concat('Ms.',n) where id=pid;
-    -> end if;
-    -> end
-    -> $$
-Query OK, 0 rows affected (0.03 sec)
-
-mysql> select*from person$$
-+----+---------+--------+
-| id | name    | gender |
-+----+---------+--------+
-|  1 | Abhi    | Male   |
-|  2 | Akansha | Female |
-|  3 | Arun    | Male   |
-+----+---------+--------+
-3 rows in set (0.01 sec)
-
-mysql> call salutation(1)$$
-Query OK, 1 row affected (0.02 sec)
-
-mysql> select*from person$$
-+----+---------+--------+
-| id | name    | gender |
-+----+---------+--------+
-|  1 | Mr.Abhi | Male   |
-|  2 | Akansha | Female |
-|  3 | Arun    | Male   |
-+----+---------+--------+
-3 rows in set (0.00 sec)
-
-mysql> call salutation(2,3)$$
-ERROR 1318 (42000): Incorrect number of arguments for PROCEDURE employe_table.salutation; expected 1, got 2
-mysql> call salutation(2)$$
-Query OK, 1 row affected (0.01 sec)
-
-mysql> call salutation(3)$$
-Query OK, 1 row affected (0.01 sec)
-
-mysql> select*from person$$
-+----+------------+--------+
-| id | name       | gender |
-+----+------------+--------+
-|  1 | Mr.Abhi    | Male   |
-|  2 | Ms.Akansha | Female |
-|  3 | Mr.Arun    | Male   |
-+----+------------+--------+
-3 rows in set (0.00 sec)
-
-
 //////////////////////////////////////////////////////////////
 Assig 2
 
@@ -241,5 +89,81 @@ mysql> select*from user_history$$
 |   NULL | Ajit | ajit123      | 12:35:54 |
 +--------+------+--------------+----------+
 3 rows in set (0.00 sec)
+
+mysql>
+
+
+///////////////////////////////////////////////////////////////
+mysql> drop table person;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> select*from person;
+ERROR 1146 (42S02): Table 'employe_table.person' doesn't exist
+mysql> create table person (id int primary key, name varchar(15), gender varchar(40));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into person values(10, 'Abhi', 'Male');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into person values(11, 'Akansha', 'Female');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into person values(12, 'Arun', 'Male');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from person;
++----+---------+--------+
+| id | name    | gender |
++----+---------+--------+
+| 10 | Abhi    | Male   |
+| 11 | Akansha | Female |
+| 12 | Arun    | Male   |
++----+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> delimiter #
+mysql> create procedure p1(IN i int)
+    -> begin
+    -> declare n varchar(40);
+    -> declare g varchar(40);
+    -> select name,gender into n,g from person where id=i;
+    -> if g='Male' then
+    -> select concat('Mr',n);
+    -> else
+    -> select concat('Ms',n);
+    -> end if;
+    -> end
+    -> #
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call p1(10)#
++----------------+
+| concat('Mr',n) |
++----------------+
+| MrAbhi         |
++----------------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> call p1(11)#
++----------------+
+| concat('Ms',n) |
++----------------+
+| MsAkansha      |
++----------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call p1(12)#
++----------------+
+| concat('Mr',n) |
++----------------+
+| MrArun         |
++----------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
 
 mysql>
