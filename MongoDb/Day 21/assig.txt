@@ -1,0 +1,62 @@
+> use mydbs;
+switched to db mydbs
+
+> db.createCollection("student_table")
+{ "ok" : 1 }
+
+> db.student_table.insert ( {_id: "id" , sequence_value : 0 } )
+WriteResult ( { "nInserted" : 1 } )
+
+>function seq(seqName){var seqDoc = db.student_table.findAndModify({ query:{_id: seqName }, update: {$inc:{sequence_value:1}},  new:true}); return "ABC"+seqDoc.sequence_value;}
+
+>db.student_table.insert({"_id": getSeq("id"),"name": "Abhishek","Branch": "IT"});
+WriteResult({ "nInserted" : 1 })
+>db.student_table.insert({"_id": getSeq("id"),"name": "Arun","Branch": "HM"});
+WriteResult({ "nInserted" : 1 })
+>db.student_table.insert({"_id": getSeq("id"),"name": "Ampadi","Branch": "Civil"});
+WriteResult({ "nInserted" : 1 })
+>db.student_table.insert({"_id": getSeq("id"),"name": "Ajay","Branch": "CS"});
+WriteResult({ "nInserted" : 1 })
+>db.student_table.insert({"_id": getSeq("id"),"name": "Raj","Branch": "Electronic"});
+WriteResult({ "nInserted" : 1 })
+
+
+> db.student.find()
+{ "_id" : "id", "sequence_value" : 5 }
+{"_id" : "ABC1","name": "Abhishek","Branch": "IT"}
+{"_id" : "ABC2","name": "Arun","Branch": "HM"}
+{"_id" : "ABC3","name": "Ampadi","Branch": "Civil"}
+{"_id" : "ABC4","name": "Ajay","Branch": "CS"}
+{"_id" : "ABC5","name": "Raj","Branch": "Electronic"}
+>
+
+
+///////////////////////////////////////////////
+
+
+> db.createCollection("Apt")
+{ "ok" : 1 }
+
+> db.Apt.insert ( {_id: "id" , sequence_value : 0 } )
+WriteResult ( { "nInserted" : 1 } )
+
+
+>function seq(seqName){var seqDoc = db.Apt.findAndModify({ query:{_id: seqName }, update: {$inc:{sequence_value:1}},  new:true}); return seqDoc.sequence_value;}
+
+
+>db.Apt.insert({"_id": getSeq("id"),"name": "Abhishek","floor":2});
+WriteResult({ "nInserted" : 1 })
+>db.Apt.insert({"_id": getSeq("id"),"name": "Arun","floor":1});
+WriteResult({ "nInserted" : 1 })
+>db.Apt.insert({"_id": getSeq("id"),"name": "Ajay","floor":6});
+WriteResult({ "nInserted" : 1 })
+>db.Apt.insert({"_id": getSeq("id"),"name": "Ampadi","floor":5});
+WriteResult({ "nInserted" : 1 })
+
+> db.student.find()
+{ "_id" : "id", "sequence_value" : 4 }
+{"_id" : "1","name": "Abhishek","floor":2}
+{"_id" : "2","name": "Arun","floor":1}
+{"_id" : "3","name": "Ajay","floor":6}
+{"_id" : "4","name": "Ampadi","floor":5}
+>		
