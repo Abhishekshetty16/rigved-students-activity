@@ -1,9 +1,9 @@
 let fs = require('fs');
-let data = fs.readFileSync("activity2.json");
+let data = fs.readFileSync("emp.json");
 let jsonString = data.toString();
 let jsObject = JSON.parse(jsonString);
 
 for( let i = 0; i < jsObject.length; i++) {
-    let{id,name,salary} = jsObject[i];
-    console.log(`Id = ${id}, Name = ${name}, Salary = ${salary}`);
+    let{name,age} = jsObject[i];
+    console.log(`Name = ${name}, AGE = ${age}`);
 }

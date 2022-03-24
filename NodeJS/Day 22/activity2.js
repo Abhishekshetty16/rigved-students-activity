@@ -1,15 +1,19 @@
-let fs =require('fs');
-const { fstat } = require("fs");
-let read=require("readline-sync");
- let id =read.question("Enter ID : ");
- let name=read.question("Enter your name : ");
- let salary=read.questionFloat("enter your salary : ");
- let z={id ,name , salary};
- let jsonString=JSON.stringify(z);
- console.log(jsonString)
-
- fs.writeFileSync('activity2.json',jsonString.concat(","),{flag:'a+'});
- console.log("Succesful");
+let fs = require("fs"); 
+let read = require("readline-sync");
 
 
- 
+let data = fs.readFileSync('emp.json');
+let dataString = data.toString(); 
+let jsArray = undefined;
+if(dataString.length < 1 || dataString == "") {
+    jsArray = []; 
+} else {
+    jsArray = JSON.parse(dataString);y
+}
+
+let n = read.question('Enter name: ');
+let a = read.questionInt('Enter age: ');
+let emp = {name : n, age : a};
+jsArray.push(emp); 
+let jsonArray = JSON.stringify(jsArray); 
+fs.writeFileSync("emp.json", jsonArray);
