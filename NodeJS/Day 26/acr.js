@@ -9,7 +9,7 @@ var conn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root', 
-    database: 'employeedb' 
+    database: 'mydb' 
   });
 conn.connect((err) =>{
     if(err) throw err; 
