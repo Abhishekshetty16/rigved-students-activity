@@ -1,0 +1,13 @@
+<h1>USER TABLE</h1>
+<table border="5">
+        <tr>
+            <th >NAME</th><th >GENDER</th><th >STATE</th><th>CITY</th>
+        </tr>
+        <tr *ngFor = "let y of user">
+         <td >{{y.name | Fname: y.gender | uppercase}}</td>
+         <td >{{y.gender | uppercase}}</td>
+         <td >{{y.address.state}}</td>
+         <td >{{y.address.city}}</td>
+        </tr>
+    
+</table>
