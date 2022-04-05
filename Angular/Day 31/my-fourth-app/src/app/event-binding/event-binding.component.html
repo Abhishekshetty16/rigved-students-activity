@@ -1,0 +1,10 @@
+<div>
+    Firstname : <input type="text" #first><br/>
+    Lastname : <input type="text" #second><br/>
+
+    <button (click)="save(first.value,second.value)">SAVE</button>
+    <div>
+        <p>Firstnamr:{{firstname}}</p>
+        <p>Lastname:{{lastname}}</p>
+    </div>
+</div>

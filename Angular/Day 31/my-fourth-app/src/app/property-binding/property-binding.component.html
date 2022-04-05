@@ -1,0 +1,8 @@
+<div>
+    <button (click)="toggle()">TOGGLE</button>
+    <div>
+        In Progress :{{inProgress}}
+    </div>
+    <button [disabled] = "inProgress">UPDATE</button>
+    <p [hidden]="inProgress">This is the content used to use inProgress</p>
+</div>

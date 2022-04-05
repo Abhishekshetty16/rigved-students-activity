@@ -1,0 +1,18 @@
+<div>
+    <table *ngIf ="user" class="table table-striped">
+        <thead>
+            <tr>
+                <th>NAME</th><th>GENDER</th><th>STATE</th><th>CITY</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor ="let users of user">
+                <td>{{users.name | nameFormatter : users.gender}}</td>
+                <td>{{users.gender}}</td>
+                <td>{{users.address.state}}</td>
+                <td>{{users.address.city}}</td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
