@@ -1,0 +1,11 @@
+    <div *ngFor="let x of products">
+        <div class="card" style="width:18rem;">
+        <div class="card-body">
+     <h5 class="card-title">Product Name: <p>{{x.name}}</p></h5>
+    <h5 class="card-title" >Price: <p id="i1">{{x.price}}</p></h5>
+        <button (click)="send(x.price)">+</button>&nbsp;
+        <button (click)="remove(x.price)">-</button>
+        </div>
+        </div>
+    </div>
+    

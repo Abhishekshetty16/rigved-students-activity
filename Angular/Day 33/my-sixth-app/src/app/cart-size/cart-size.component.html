@@ -1,0 +1,6 @@
+<div>
+    <h1>Cart size :{{size}}</h1>
+    <h1>Total Amount :{{amount}}</h1>
+    <app-list-products (data) ="size=$event"
+        (price1)="amount=$event"></app-list-products>
+</div>
