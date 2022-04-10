@@ -1,0 +1,57 @@
+<div>
+    <h1> REGISTRATION FORM</h1>
+<form #user = "ngForm" (ngSubmit) ="handleSubmit(user.value)">
+    <div>
+        Firstname
+        <input type="text" name="fn" ngModel #tf1="ngModel" autocomplete="off" required minlength="3">
+        <span [hidden]="tf1.valid || tf1.pristine" class="text-danger">*Firstname must be greater than 3 character</span>
+    </div>
+    <div>
+        Lastname
+        <input type="text" name="ls" ngModel #tf2="ngModel" autocomplete="off" required minlength="3">
+        <span [hidden]="tf2.valid || tf2.pristine" class="text-danger">*Lastname must be greater than 3 character</span>
+    </div>
+    <div>
+        Gender
+        <input type="radio" name="gn" value="M" ngModel #tf3="ngModel" required >MALE
+        <input type="radio" name="gn" value="F" ngModel #tf3="ngModel" required>FEMALE
+        <span [hidden]="tf3.valid || tf3.pristine" class="text-danger">*Gender must be selected</span>
+    </div>
+    <div>
+        SKills
+        <input type="checkbox" name="sk" value="JS" ngModel #tf4="ngModel" required>Javascript
+        <input type="checkbox" name="sk" value="HTML" ngModel #tf4="ngModel" required>Html
+        <input type="checkbox" name="sk" value="PYTHON" ngModel #tf4="ngModel" required>Python
+        <input type="checkbox" name="sk" value="C++" ngModel #tf4="ngModel" required>C++
+        <span [hidden]="tf4.valid || tf4.pristine" class="text-danger">*Select any one skills</span>
+    </div>
+    <div>
+        Qualification
+        <select name="qu" ngModel #tf5="ngModel" required>
+                <option value="BSCIT" ngModel  >Bsc.IT</option>
+                <option value="BCom" ngModel  >BCom</option>
+                <option value="BSC" ngModel  >Bsc</option>
+                <option value="BCA" ngModel  >BCA</option>
+                <option value="MCA" ngModel  >MCA</option>
+                <option value="Mtech" ngModel  >M.tech</option>
+        
+        </select>
+        <span [hidden]="tf5.valid || tf5.pristine" class="text-danger">*Select proper qualification</span>
+    </div>
+    <div>
+        Address <textarea name="add" rows="4" cols="40" ngModel #tf6="ngModel" required></textarea>
+        <span [hidden]="tf6.valid || tf6.pristine" class="text-danger">*Address is mandatory</span>
+    </div>
+    <div>
+        <input type="submit" value="SUBMIT" [disabled]="user.invalid">
+    </div>
+</form>
+<div [hidden]="user.invalid">
+<p>fname :{{fname}}</p>
+<p>lname :{{lname}}</p>
+<p>gender :{{gender}}</p>
+<p> skills:{{skills}}</p>
+<p>qualification:{{qualification}}</p>
+<p>address:{{address}}</p>
+</div>
+</div>
