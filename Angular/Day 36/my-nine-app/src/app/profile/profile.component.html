@@ -1,0 +1,22 @@
+<div>
+    <form [formGroup]="profile" (ngSubmit)="handleSubmit()" class="form-control">
+        <div><p>FirstName: <input type="text" formControlName="firstname" autocomplete="off">
+            <span [hidden]="profile.controls['firstname'].valid || profile.controls['firstname'].pristine" 
+            class="text-danger">*first name more than 5</span></p></div>
+        <div><p>LastName: <input type="text" formControlName="lastname" autocomplete="off">
+        <span [hidden]="profile.controls['lastname'].valid || profile.controls['lastname'].pristine"
+        class="text-danger">*lastname more than 5</span></p></div> 
+        <div> 
+        <div formGroupName="address"><p>Address :</p>
+            <p>State: <input type="text" formControlName="state"></p>
+            <p>City: <input type="text" formControlName="city"></p>
+            <p>PinCode: <input type="number" formControlName="pin"></p>
+        </div>
+        </div>
+        <p><button type="submit" value="submit" [disabled]="profile.invalid">Submit</button></p>
+    </form>
+</div>
+
+<div>
+    Profile Value: {{profile.value | json}}
+</div>
