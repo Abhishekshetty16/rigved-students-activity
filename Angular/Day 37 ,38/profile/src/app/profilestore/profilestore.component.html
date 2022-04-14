@@ -1,0 +1,46 @@
+<div>
+    <h4>Profile store form</h4>
+    <form [formGroup]="userForm" (ngSubmit)="saveForm()" class="form-control">
+
+<div>
+    Name:<input type="text" formControlName="name">
+    <span class="text-danger "[hidden]="userForm.controls['name'].valid || userForm.controls['name'].pristine">
+        Name is required
+    </span>
+</div>
+<div>
+   Gender:<input type="radio"  value="M" formControlName="gender">MALE
+        <input type="radio" value="F" formControlName="gender">FEMALE
+        <span class="text-danger "[hidden]="userForm.controls['gender'].valid || userForm.controls['gender'].pristine">
+            Select GENDER
+        </span>
+</div>
+<div>
+    Phone NO <input type="number" formControlName="phoneno">
+    <span class="text-danger "[hidden]="userForm.controls['phoneno'].valid || userForm.controls['phoneno'].pristine">
+        Enter PHONE NO
+    </span>
+</div>
+<div>
+    Email Id :<input type="email" formControlName="emailId">
+    <span class="text-danger "[hidden]="userForm.controls['emailId'].valid || userForm.controls['emailId'].pristine">
+        Enter valid EMAILID
+    </span>
+</div>
+<div formGroupName="address">Address
+    <p>State :<input type="text" formControlName="state"></p>
+<span class="text-danger"[hidden]="userForm.controls['address'].get('state')?.valid || userForm.controls['address'].get('state')?.pristine">
+State is required
+</span>
+    <p>city:<input type="city" formControlName="city"></p>
+    <span class="text-danger"[hidden]="userForm.controls['address'].get('city')?.valid || userForm.controls['address'].get('city')?.pristine">
+        City is required</span>
+<p> Pincode:<input type="number" formControlName="pincode"></p>
+<span class="text-danger"[hidden]="userForm.controls['address'].get('pincode')?.valid || userForm.controls['address'].get('pincode')?.pristine">
+    Pincode is required</span>
+</div>
+<div>
+    <input type="submit" value="submit" class="btn btn-secondary" [disabled]="userForm.invalid">
+</div>
+    </form>
+</div>

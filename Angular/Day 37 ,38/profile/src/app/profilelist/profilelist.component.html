@@ -1,0 +1,31 @@
+<div>
+    <h1>user list</h1>
+    <table *ngIf="items" class="table table-striped">
+        <thead>
+            <tr>
+                <th>USER ID</th>
+                <th>NAME</th>
+                <th>GENDER</th>
+                <th>PHONE NO</th>
+                <th>EMAILID</th>
+                <th>STATE</th>
+                <th>CITY</th>
+                <th>PINCODE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- let j=index"  <td>{{j+1}}</td>-->
+            <tr  *ngFor="let y of items">
+                <td>{{y.profileId}}</td>
+                <td>{{y.name}}</td>
+                <td>{{y.gender}}</td>
+                <td>{{y.phoneno}}</td>
+                <td>{{y.emailId}}</td>
+                <td>{{y.address.state}}</td>
+                <td>{{y.address.city}}</td>
+                <td>{{y.address.pincode}}</td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>

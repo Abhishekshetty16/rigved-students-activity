@@ -1,0 +1,56 @@
+<div>
+    <h2>Update user</h2>
+    Enter id:<input type="number"  [formControl]="id">
+<input type="button" value="update" (click)="getInfo()" (click)="setProfileValue()" class="btn btn-primary">
+</div>
+
+<div>
+    <form *ngIf="object" [formGroup]="userForm" (ngSubmit)="updateForm()">
+           <div> Name:
+           <input type="text" formControlName="name" class="form-control">
+                <span class="text-danger" [hidden]="userForm.controls['name'].valid || userForm.controls['name'].pristine">Name is required</span>
+     
+            </div>
+        <div>
+            Gender:
+            <input type="radio" name="gender" value="Male" formControlName="gender" >Male
+                <input type="radio" name="gender" value="Female" formControlName="gender">Female
+                <span class="text-danger" [hidden]="userForm.controls['gender'].valid || userForm.controls['gender'].pristine">Gender is required</span>
+            </div>
+        <div>
+       Phone Number:
+           
+                <input type="text" formControlName="phoneno" class="form-control">
+                <span class="text-danger" [hidden]="userForm.controls['phoneno'].valid || userForm.controls['phoneno'].pristine">Phone number must of 10 digit</span>
+            </div>
+        <div>
+            Email Id:
+            
+                <input type="text" formControlName="emailId" class="form-control">
+                <span class="text-danger" [hidden]="userForm.controls['emailId'].valid || userForm.controls['emailId'].pristine">Email ID is required</span>
+            </div>
+        <div formGroupName="address">
+            <h4>Address Details</h4>
+           
+                State:
+               
+                    <input type="text" formControlName="state" class="form-control">
+                    <span class="text-danger" [hidden]="userForm.controls['address'].get('state')?.valid || userForm.controls['address'].get('state')?.pristine">State is required</span>
+        
+          
+                City:
+                <input type="text" formControlName="city" class="form-control">
+                    <span class="text-danger" [hidden]="userForm.controls['address'].get('city')?.valid || userForm.controls['address'].get('city')?.pristine">City is required</span>
+           
+         
+                Pin Code:
+                <input type="text" formControlName="pincode" class="form-control"> 
+                <span class="text-danger" [hidden]="userForm.controls['address'].get('pincode')?.valid || userForm.controls['address'].get('pincode')?.pristine">Pin Code must be of 6 digits</span>
+          
+        </div>
+        <div>
+            <input type="submit" value="Update" [disabled]="userForm.invalid" >
+        </div>
+       
+    </form>
+</div>
