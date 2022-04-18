@@ -1,0 +1,19 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+
+@Component({
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
+})
+export class DashboardComponent implements OnInit {
+username :string |undefined=undefined;
+  constructor(private _activateRoute:ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this._activateRoute.parent?.params.subscribe((parameter:Params)=>{
+      this.username=parameter['name']
+    })
+  }
+
+}
