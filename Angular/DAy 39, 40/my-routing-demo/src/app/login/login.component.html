@@ -1,0 +1,15 @@
+<div>
+    <h2>Login Component</h2>
+    <form>
+        <div>
+            Username : <input type="text" [formControl]="userName" class="form-control">
+            <br/>
+            <div>
+                Password :<input type="password" formControlName ="password" class="form-control">
+            </div>
+            <input type="button" value="Login" (click)="handleLogin()">
+        </div>
+    </form>
+    <hr/>
+    <a routerLink="/register" > create user</a>
+</div>

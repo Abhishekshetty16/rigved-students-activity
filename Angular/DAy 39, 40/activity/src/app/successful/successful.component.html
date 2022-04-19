@@ -1,0 +1,16 @@
+
+<div>
+<div>
+    <h2 class="alert alert-success text-center">Succesfull login</h2>
+    <marquee> <h3 *ngIf="username"> Hello {{username}}  welcome to ONE APP</h3>
+        </marquee>
+</div>
+<div>
+    <a routerLink="detail">DETAIL</a>/ &nbsp;
+    <a routerLink="list">USER LIST</a>/ &nbsp;
+    <!--<a routerLink="delete">DELETE</a>/ &nbsp; -->
+    <a routerLink="categories">CATEGORIES</a>/ &nbsp;
+    <a routerLink="/login">LOGOUT</a>
+</div>
+<router-outlet></router-outlet>
+</div>

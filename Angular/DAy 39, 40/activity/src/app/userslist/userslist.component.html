@@ -1,0 +1,17 @@
+<div>
+    <h1>USER LIST</h1>
+    <table *ngIf="items" class="table table-striped">
+        <thead>
+            <tr>
+               <th>NAME</th><th>Password</th>
+            </tr> 
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of items">
+                <!-- <td>{{user.userId}}</td> -->
+                <td>{{user.name}}</td>
+                <td>{{user.password}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
