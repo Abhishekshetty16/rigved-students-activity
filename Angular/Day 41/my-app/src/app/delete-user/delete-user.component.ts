@@ -15,8 +15,8 @@ data: any | undefined=undefined;
   _id=new FormControl('')
   handleGet(id:number){
     console.log(id)
-    this._service.deleteUser(id).subscribe((da)=>{
-      this.data=da;
+    this._service.deleteUser(id).subscribe((d)=>{
+      this.data=d;
     })
 
 }
